@@ -37,7 +37,7 @@ export class Start extends AComponent<StartProps> {
   render() {
     let html = `
       <div>
-        <table><tr><td>NAME: </td></tr>${this._renderListDrawers()}</table>
+        <table id="table"><tr><td>NAME: </td></tr>${this._renderListDrawers()}</table>
         <button type="button" id="addButton">Add drawer</button>
         <button type="button" id="drawButton">Start Draw</button>
         <button type="button" id="resetButton">Reset</button>
@@ -48,6 +48,7 @@ export class Start extends AComponent<StartProps> {
     return html;
   }
   postRender() {
+    //user action
     document
       .getElementById("addButton")
       .addEventListener("click", this.props.onAddDrawer);
