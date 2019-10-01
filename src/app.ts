@@ -35,7 +35,6 @@ class App {
   // ------------------------------
 
   private _setComponent(name: ComponentName) {
-    console.log("_setComponent, ", this.drawerCollection.getDrawers());
     let props: any = {};
     switch (name) {
       case ComponentName.Start:
@@ -111,7 +110,10 @@ class App {
     // render
     let html = `
       <div id='root'>
-        ${this.component.render()}
+        <div id='content'>
+          <h3>ROBINSON DRAW NAMES</h3>
+          ${this.component.render()}
+        </div>
       </div>
     `;
     this.rootElement.innerHTML = html;
