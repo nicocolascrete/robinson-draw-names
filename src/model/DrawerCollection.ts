@@ -27,6 +27,7 @@ export class DrawerCollection {
   }
   public matching(): MatchVO[] {
     let matchs: MatchVO[] = [];
+    let givers: DrawerVO[] = [];
     let drawerMatchable = Object.assign([], this.drawers);
     let drawers = Object.assign([], this.drawers);
     drawers = this._shuffle<DrawerVO>(drawers);
@@ -44,12 +45,24 @@ export class DrawerCollection {
           a = a.filter(vo => vo.name !== undesirable.name);
         }
       }
+
+      // priority to no givers
+      if (a.length - givers.length > 0) {
+        for (let giver of givers) {
+          a = a.filter(vo => vo.name !== giver.name);
+        }
+      }
+
       if (a.length > 0) {
+        //select reciver
         const receveuverId = Math.floor(Math.random() * a.length);
         const receveuver = a[receveuverId];
         drawerMatchable = drawerMatchable.filter(
           vo => vo.name !== receveuver.name
         );
+        //givers
+        givers.push(drawer);
+        //match
         const match = new MatchVO(drawer, receveuver);
         matchs.push(match);
       }
@@ -61,6 +74,10 @@ export class DrawerCollection {
       return this.matching();
     }
   }
+
+  // ------------------------------
+  //
+  // ------------------------------
 
   // utils to externalise in UtilsArray
   private _shuffle<T>(a: T[]): T[] {
