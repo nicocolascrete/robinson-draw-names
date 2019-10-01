@@ -3,6 +3,7 @@ import { DrawerVO } from "../../model/DrawerVO";
 
 export interface AddDrawerProps extends IComponentProps {
   onAddedDrawer: (vo: DrawerVO) => void;
+  onBack: () => void;
 }
 
 export class AddDrawer extends AComponent<AddDrawerProps> {
@@ -46,6 +47,7 @@ export class AddDrawer extends AComponent<AddDrawerProps> {
         Drawer name: <input type="text" id="drawerName"><br>
         Drawer conjoint: <input type="text" id="drawerConjoint"><br>
         <input type="button" value="Submit" id="submitButton">
+        <button type="button" id="backButton">Back</button>
       </form>
     `;
   }
@@ -59,5 +61,8 @@ export class AddDrawer extends AComponent<AddDrawerProps> {
     document
       .getElementById("submitButton")
       .addEventListener("click", this._onSubmit);
+    document
+      .getElementById("backButton")
+      .addEventListener("click", this.props.onBack);
   }
 }

@@ -30,6 +30,12 @@ export class Start extends AComponent<StartProps> {
   private _renderDrawer(vo: DrawerVO) {
     return `<tr><td>${vo.name}</td></tr>`;
   }
+  private _renderMatchingButton() {
+    if (this.drawers.getDrawers().length > 1) {
+      return `<button type="button" id="drawButton">Start Draw</button>`;
+    }
+    return "";
+  }
 
   // ------------------------------
   //  AComponent
@@ -39,7 +45,7 @@ export class Start extends AComponent<StartProps> {
       <div>
         <table id="table"><tr><td>NAME: </td></tr>${this._renderListDrawers()}</table>
         <button type="button" id="addButton">Add drawer</button>
-        <button type="button" id="drawButton">Start Draw</button>
+        ${this._renderMatchingButton()}
         <button type="button" id="resetButton">Reset</button>
       </div>
     `;

@@ -12,6 +12,7 @@ class App {
   component: AComponent<IComponentProps>;
   drawerCollection: DrawerCollection = new DrawerCollection();
   state: AppSate = AppSate.Start;
+  prevState: AppSate = null;
 
   constructor(rootElement: HTMLElement) {
     this.rootElement = rootElement;
@@ -23,6 +24,7 @@ class App {
 
   private _setState(newState: AppSate) {
     if (this.state != newState) {
+      this.prevState = this.state;
       this.state = newState;
       this.render();
     }
@@ -47,14 +49,16 @@ class App {
       case ComponentName.AddDrawer:
         props = {
           onUpdate: this.onUpdate,
-          onAddedDrawer: this.onAddedDrawer
+          onAddedDrawer: this.onAddedDrawer,
+          onBack: this.onBack
         };
         this.component = new AddDrawer(this.drawerCollection, props);
         break;
       case ComponentName.Results:
         props = {
           onAddDrawer: this.onAddDrawer,
-          onUpdate: this.onUpdate
+          onUpdate: this.onUpdate,
+          onRestart: this.onRestart
         };
         this.component = new Results(this.drawerCollection, props);
         break;
@@ -68,15 +72,22 @@ class App {
   onUpdate = () => {
     this.render();
   };
+  onBack = (event: any) => {
+    this._setState(this.prevState);
+  };
   onAddDrawer = (event: any) => {
     this._setState(AppSate.AddDrawer);
   };
   onAddedDrawer = (vo: DrawerVO) => {
     this.drawerCollection.addDrawer(vo);
-    this._setState(AppSate.Start);
+    this._setState(this.prevState);
   };
   onStartDraw = (event: any) => {
     this._setState(AppSate.Results);
+  };
+  onRestart = (event: any) => {
+    this.drawerCollection.reset();
+    this._setState(AppSate.Start);
   };
 
   // ------------------------------

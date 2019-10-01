@@ -3,6 +3,7 @@ import { MatchVO } from "../../model/MatchVO";
 
 export interface ResultsProps extends IComponentProps {
   onAddDrawer: () => void;
+  onRestart: () => void;
 }
 
 export class Results extends AComponent<ResultsProps> {
@@ -36,6 +37,7 @@ export class Results extends AComponent<ResultsProps> {
         )}</table>
         <button type="button" id="matchButton">re match</button>
         <button type="button" id="addButton">Add drawer</button>
+        <button type="button" id="restartButton">Re start</button>
       </div>
     `;
     // patch
@@ -49,5 +51,8 @@ export class Results extends AComponent<ResultsProps> {
     document
       .getElementById("addButton")
       .addEventListener("click", this.props.onAddDrawer);
+    document
+      .getElementById("restartButton")
+      .addEventListener("click", this.props.onRestart);
   }
 }
