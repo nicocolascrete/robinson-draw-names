@@ -1,7 +1,9 @@
 import { IComponent } from "./IComponent";
 import { DrawerCollection } from "../model/DrawerCollection";
-
-export class AComponent<T> implements IComponent<T> {
+export interface IComponentProps {
+  onUpdate: () => void;
+}
+export class AComponent<T extends IComponentProps> implements IComponent<T> {
   props: T;
   drawers: DrawerCollection;
 
@@ -13,6 +15,9 @@ export class AComponent<T> implements IComponent<T> {
   // ------------------------------
   //  RENDER
   // ------------------------------
+  update() {
+    this.props.onUpdate();
+  }
   render() {}
   postRender() {}
 }

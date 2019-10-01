@@ -1,6 +1,6 @@
 import { AppSate } from "./config/AppState";
 import { DrawerCollection } from "./model/DrawerCollection";
-import { AComponent } from "./ui/AComponent";
+import { AComponent, IComponentProps } from "./ui/AComponent";
 import { Results } from "./ui/component/Results";
 import { Start } from "./ui/component/Start";
 import { ComponentName } from "./ui/ComponentName";
@@ -9,7 +9,7 @@ import { DrawerVO } from "./model/DrawerVO";
 
 class App {
   rootElement: HTMLElement;
-  component: AComponent<any>;
+  component: AComponent<IComponentProps>;
   drawerCollection: DrawerCollection = new DrawerCollection();
   state: AppSate = AppSate.Start;
 
@@ -38,6 +38,7 @@ class App {
     switch (name) {
       case ComponentName.Start:
         props = {
+          onUpdate: this.onUpdate,
           onAddDrawer: this.onAddDrawer,
           onStartDraw: this.onStartDraw
         };
@@ -45,11 +46,16 @@ class App {
         break;
       case ComponentName.AddDrawer:
         props = {
+          onUpdate: this.onUpdate,
           onAddedDrawer: this.onAddedDrawer
         };
         this.component = new AddDrawer(this.drawerCollection, props);
         break;
       case ComponentName.Results:
+        props = {
+          onAddDrawer: this.onAddDrawer,
+          onUpdate: this.onUpdate
+        };
         this.component = new Results(this.drawerCollection, props);
         break;
     }
@@ -59,6 +65,9 @@ class App {
   //  USER ACTIONS
   // ------------------------------
 
+  onUpdate = () => {
+    this.render();
+  };
   onAddDrawer = (event: any) => {
     this._setState(AppSate.AddDrawer);
   };

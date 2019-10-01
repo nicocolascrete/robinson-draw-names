@@ -1,7 +1,7 @@
-import { AComponent } from "../AComponent";
+import { AComponent, IComponentProps } from "../AComponent";
 import { DrawerVO } from "../../model/DrawerVO";
 
-export interface AddDrawerProps {
+export interface AddDrawerProps extends IComponentProps {
   onAddedDrawer: (vo: DrawerVO) => void;
 }
 
@@ -22,6 +22,17 @@ export class AddDrawer extends AComponent<AddDrawerProps> {
     this.drawerConjoint = event.target.value;
   };
   private _onSubmit = (event: any) => {
+    if (this.drawerName == "" || this.drawers.getDrawer(this.drawerName)) {
+      alert("Désolé mais ce nom est déjà utilisé");
+      return;
+    }
+    if (
+      this.drawerConjoint != "" &&
+      !this.drawers.getDrawer(this.drawerConjoint)
+    ) {
+      alert("Désolé mais votre conjint n'est pas dans la liste actuellement");
+      return;
+    }
     const vo = new DrawerVO(this.drawerName, this.drawerConjoint);
     this.props.onAddedDrawer(vo);
   };
