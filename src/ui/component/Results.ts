@@ -35,9 +35,9 @@ export class Results extends AComponent<ResultsProps> {
         <table><tr><td>GIVER</td><td>RECEVER</td></tr>${matchs.map(vo =>
           this._renderMatch(vo)
         )}</table>
-        <button type="button" id="matchButton">re match</button>
+        <button type="button" id="matchButton">Rematch</button>
         <button type="button" id="addButton">Add drawer</button>
-        <button type="button" id="restartButton">Re start</button>
+        <button type="button" id="restartButton">Restart</button>
       </div>
     `;
     // patch

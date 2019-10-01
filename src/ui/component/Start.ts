@@ -23,9 +23,12 @@ export class Start extends AComponent<StartProps> {
   // ------------------------------
 
   private _renderListDrawers() {
-    let a = [];
-    this.drawers.getDrawers().map(vo => a.push(this._renderDrawer(vo)));
-    return a;
+    if (this.drawers.getDrawers().length > 0) {
+      let a = [];
+      this.drawers.getDrawers().map(vo => a.push(this._renderDrawer(vo)));
+      return `<table id="table"><tr><td>NAME</td></tr>${a}</table>`;
+    }
+    return `<p>Welcome to robinson draw names, the application that will allow you to prepare the draw for your family gifts.</p>`;
   }
   private _renderDrawer(vo: DrawerVO) {
     return `<tr><td>${vo.name}</td></tr>`;
@@ -36,6 +39,12 @@ export class Start extends AComponent<StartProps> {
     }
     return "";
   }
+  private _renderResetButton() {
+    if (this.drawers.getDrawers().length > 0) {
+      return `<button type="button" id="resetButton">Reset</button>`;
+    }
+    return "";
+  }
 
   // ------------------------------
   //  AComponent
@@ -43,10 +52,10 @@ export class Start extends AComponent<StartProps> {
   render() {
     let html = `
       <div>
-        <table id="table"><tr><td>NAME: </td></tr>${this._renderListDrawers()}</table>
+        ${this._renderListDrawers()}
         <button type="button" id="addButton">Add drawer</button>
         ${this._renderMatchingButton()}
-        <button type="button" id="resetButton">Reset</button>
+        ${this._renderResetButton()}
       </div>
     `;
     // patch
@@ -58,11 +67,15 @@ export class Start extends AComponent<StartProps> {
     document
       .getElementById("addButton")
       .addEventListener("click", this.props.onAddDrawer);
-    document
-      .getElementById("drawButton")
-      .addEventListener("click", this.props.onStartDraw);
-    document
-      .getElementById("resetButton")
-      .addEventListener("click", this._onReset);
+    if (document.getElementById("drawButton")) {
+      document
+        .getElementById("drawButton")
+        .addEventListener("click", this.props.onStartDraw);
+    }
+    if (document.getElementById("resetButton")) {
+      document
+        .getElementById("resetButton")
+        .addEventListener("click", this._onReset);
+    }
   }
 }
