@@ -7,6 +7,8 @@ export class DrawerVO {
     this.id = Math.ceil(Math.random() * new Date().getTime()).toString();
     this.name = name;
     this.excludeDrawers = [];
-    this.excludeDrawers.push(conjoint);
+    if (conjoint != "") {
+      this.excludeDrawers.push(conjoint);
+    }
   }
 }
