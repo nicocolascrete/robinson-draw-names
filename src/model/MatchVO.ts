@@ -1,11 +1,11 @@
-import { DrawerVO } from "./DrawerVO";
+import { UserVO } from "./UserVO";
 
 export class MatchVO {
   id: string;
-  giver: DrawerVO;
-  receveuver: DrawerVO;
+  giver: UserVO;
+  receveuver: UserVO;
 
-  constructor(giver: DrawerVO, receveuver: DrawerVO) {
+  constructor(giver: UserVO, receveuver: UserVO) {
     this.id = Math.ceil(Math.random() * new Date().getTime()).toString();
     this.giver = giver;
     this.receveuver = receveuver;

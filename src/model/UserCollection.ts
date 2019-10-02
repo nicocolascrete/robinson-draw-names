@@ -1,25 +1,25 @@
-import { DrawerVO } from "./DrawerVO";
+import { UserVO } from "./UserVO";
 import { MatchVO } from "./MatchVO";
 
-export class DrawerCollection {
-  drawers: DrawerVO[] = [];
+export class UserCollection {
+  users: UserVO[] = [];
 
   constructor() {}
 
   // ------------------------------
   //
   // ------------------------------
-  public addDrawer(vo: DrawerVO) {
-    this.drawers.push(vo);
+  public addUser(vo: UserVO) {
+    this.users.push(vo);
   }
   public reset() {
-    this.drawers = [];
+    this.users = [];
   }
-  public getDrawers(): DrawerVO[] {
-    return this.drawers;
+  public getUsers(): UserVO[] {
+    return this.users;
   }
-  public getDrawer(name: string): DrawerVO {
-    const results = this.drawers.filter(drawer => drawer.name == name);
+  public getUser(name: string): UserVO {
+    const results = this.users.filter(user => user.name == name);
     if (results.length > 0) {
       return results[0];
     }
@@ -27,20 +27,20 @@ export class DrawerCollection {
   }
   public matching(): MatchVO[] {
     let matchs: MatchVO[] = [];
-    let givers: DrawerVO[] = [];
-    let drawerMatchable = Object.assign([], this.drawers);
-    let drawers = Object.assign([], this.drawers);
-    drawers = this._shuffle<DrawerVO>(drawers);
+    let givers: UserVO[] = [];
+    let usersMatchable = Object.assign([], this.users);
+    let users = Object.assign([], this.users);
+    users = this._shuffle<UserVO>(users);
     //TODO sort drawers, drawer with exlude drawer in first
 
     // matching
-    for (let drawer of drawers) {
-      let a = Object.assign([], drawerMatchable);
-      //exclude current drawer
-      a = a.filter(vo => vo.name !== drawer.name);
-      //current drawer excludeDrawers
-      for (let name of drawer.excludeDrawers) {
-        const undesirable = this.getDrawer(name);
+    for (let user of users) {
+      let a = Object.assign([], usersMatchable);
+      //exclude current user
+      a = a.filter(vo => vo.name !== user.name);
+      //current drawer excludeUsers
+      for (let name of user.excludeUsers) {
+        const undesirable = this.getUser(name);
         if (undesirable !== null) {
           a = a.filter(vo => vo.name !== undesirable.name);
         }
@@ -57,18 +57,18 @@ export class DrawerCollection {
         //select reciver
         const receveuverId = Math.floor(Math.random() * a.length);
         const receveuver = a[receveuverId];
-        drawerMatchable = drawerMatchable.filter(
+        usersMatchable = usersMatchable.filter(
           vo => vo.name !== receveuver.name
         );
         //givers
-        givers.push(drawer);
+        givers.push(user);
         //match
-        const match = new MatchVO(drawer, receveuver);
+        const match = new MatchVO(user, receveuver);
         matchs.push(match);
       }
     }
     // algorythme à améliorer
-    if (matchs.length == this.drawers.length) {
+    if (matchs.length == this.users.length) {
       return matchs;
     } else {
       return this.matching();

@@ -1,16 +1,16 @@
 import { AppSate } from "./config/AppState";
-import { DrawerCollection } from "./model/DrawerCollection";
+import { UserCollection } from "./model/UserCollection";
 import { AComponent, IComponentProps } from "./ui/AComponent";
 import { Results } from "./ui/component/Results";
 import { Start } from "./ui/component/Start";
 import { ComponentName } from "./ui/ComponentName";
-import { AddDrawer } from "./ui/component/AddDrawer";
-import { DrawerVO } from "./model/DrawerVO";
+import { AddUser } from "./ui/component/AddUser";
+import { UserVO } from "./model/UserVO";
 
 class App {
   rootElement: HTMLElement;
   component: AComponent<IComponentProps>;
-  drawerCollection: DrawerCollection = new DrawerCollection();
+  drawerCollection: UserCollection = new UserCollection();
   state: AppSate = AppSate.Start;
   prevState: AppSate = null;
 
@@ -40,22 +40,22 @@ class App {
       case ComponentName.Start:
         props = {
           onUpdate: this.onUpdate,
-          onAddDrawer: this.onAddDrawer,
+          onAddUser: this.onAddUser,
           onStartDraw: this.onStartDraw
         };
         this.component = new Start(this.drawerCollection, props);
         break;
-      case ComponentName.AddDrawer:
+      case ComponentName.AddUser:
         props = {
           onUpdate: this.onUpdate,
-          onAddedDrawer: this.onAddedDrawer,
+          onAddedUser: this.onAddedUser,
           onBack: this.onBack
         };
-        this.component = new AddDrawer(this.drawerCollection, props);
+        this.component = new AddUser(this.drawerCollection, props);
         break;
       case ComponentName.Results:
         props = {
-          onAddDrawer: this.onAddDrawer,
+          onAddUser: this.onAddUser,
           onUpdate: this.onUpdate,
           onRestart: this.onRestart
         };
@@ -74,11 +74,11 @@ class App {
   onBack = (event: any) => {
     this._setState(this.prevState);
   };
-  onAddDrawer = (event: any) => {
+  onAddUser = (event: any) => {
     this._setState(AppSate.AddDrawer);
   };
-  onAddedDrawer = (vo: DrawerVO) => {
-    this.drawerCollection.addDrawer(vo);
+  onAddedUser = (vo: UserVO) => {
+    this.drawerCollection.addUser(vo);
     this._setState(this.prevState);
   };
   onStartDraw = (event: any) => {
@@ -100,7 +100,7 @@ class App {
         this._setComponent(ComponentName.Start);
         break;
       case AppSate.AddDrawer:
-        this._setComponent(ComponentName.AddDrawer);
+        this._setComponent(ComponentName.AddUser);
         break;
       case AppSate.Results:
         this._setComponent(ComponentName.Results);

@@ -1,15 +1,15 @@
 import { IComponent } from "./IComponent";
-import { DrawerCollection } from "../model/DrawerCollection";
+import { UserCollection } from "../model/UserCollection";
 export interface IComponentProps {
   onUpdate: () => void;
 }
 export class AComponent<T extends IComponentProps> implements IComponent<T> {
   props: T;
-  drawers: DrawerCollection;
+  users: UserCollection;
 
-  constructor(drawers: DrawerCollection, props: T) {
+  constructor(drawers: UserCollection, props: T) {
     this.props = props;
-    this.drawers = drawers;
+    this.users = drawers;
   }
 
   // ------------------------------

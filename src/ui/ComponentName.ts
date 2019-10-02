@@ -1,5 +1,5 @@
 export enum ComponentName {
   Start = "start",
-  AddDrawer = "add-drawer",
+  AddUser = "add-user",
   Results = "results"
 }

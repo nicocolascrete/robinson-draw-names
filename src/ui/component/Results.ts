@@ -2,7 +2,7 @@ import { AComponent, IComponentProps } from "../AComponent";
 import { MatchVO } from "../../model/MatchVO";
 
 export interface ResultsProps extends IComponentProps {
-  onAddDrawer: () => void;
+  onAddUser: () => void;
   onRestart: () => void;
 }
 
@@ -29,7 +29,7 @@ export class Results extends AComponent<ResultsProps> {
   //    ACOMPONENT
   // ------------------------------
   render() {
-    const matchs = this.drawers.matching();
+    const matchs = this.users.matching();
     let html = `
       <div>
         <table><tr><td>GIVER</td><td>RECEVER</td></tr>${matchs.map(vo =>
@@ -50,7 +50,7 @@ export class Results extends AComponent<ResultsProps> {
       .addEventListener("click", this._onMatching);
     document
       .getElementById("addButton")
-      .addEventListener("click", this.props.onAddDrawer);
+      .addEventListener("click", this.props.onAddUser);
     document
       .getElementById("restartButton")
       .addEventListener("click", this.props.onRestart);
