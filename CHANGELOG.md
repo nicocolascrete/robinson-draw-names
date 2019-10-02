@@ -3,6 +3,7 @@
 ## next
 
 - optimization matching algorythm
+- add e2e test with nightwatch
 
 ## 0.2.0
 
