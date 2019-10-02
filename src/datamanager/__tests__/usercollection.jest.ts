@@ -23,6 +23,8 @@ it("can add user with conjoint", async () => {
     expect(user).toBeInstanceOf(UserVO);
     expect(user.excludeUsers.length).toBe(1);
   }
+
+  // add test to user name
 });
 it("can't add user with exclude user wich not exist", async () => {
   const userCollections = new UserCollection();

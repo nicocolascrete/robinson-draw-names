@@ -36,7 +36,8 @@ export class UserCollection {
       for (const excludeUser of vo.excludeUsers) {
         for (const user of this.users) {
           if (user.name == excludeUser) {
-            user.excludeUsers.push(excludeUser);
+            user.excludeUsers.push(vo.name);
+            break;
           }
         }
       }
