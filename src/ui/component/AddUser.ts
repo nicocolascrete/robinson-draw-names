@@ -1,5 +1,5 @@
 import { AComponent, IComponentProps } from "../AComponent";
-import { UserVO } from "../../model/UserVO";
+import { UserVO } from "../../datamanager/model/UserVO";
 
 export interface AddUserProps extends IComponentProps {
   onAddedUser: (vo: UserVO) => void;

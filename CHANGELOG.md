@@ -2,6 +2,10 @@
 
 ## next
 
+- add jest test
+- add style
+- matching
+
 ## 0.1.0
 
 - start project

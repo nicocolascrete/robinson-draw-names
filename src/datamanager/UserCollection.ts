@@ -1,5 +1,5 @@
-import { UserVO } from "./UserVO";
-import { MatchVO } from "./MatchVO";
+import { UserVO } from "./model/UserVO";
+import { MatchVO } from "./model/MatchVO";
 
 export class UserCollection {
   users: UserVO[] = [];
@@ -10,7 +10,37 @@ export class UserCollection {
   //
   // ------------------------------
   public addUser(vo: UserVO) {
+    // don't add user if already exist
+    if (this.users.filter(user => user.name === vo.name).length > 0) {
+      console.warn(
+        "UserCollection, addUser, you already have a user with the name : " +
+          vo.name
+      );
+      return;
+    }
+    // don't add user with exlude user wich don't exist
+    if (
+      vo.excludeUsers.length > 0 &&
+      this.users.filter(user => user.name === vo.excludeUsers[0]).length == 0
+    ) {
+      console.warn(
+        "UserCollection, addUser, you try to add a user with an exclude user wich not exist :  " +
+          vo.excludeUsers
+      );
+      return;
+    }
+    // add user
     this.users.push(vo);
+    // when add a user with conjoint automaticly assiote him
+    if (vo.excludeUsers.length > 0) {
+      for (const excludeUser of vo.excludeUsers) {
+        for (const user of this.users) {
+          if (user.name == excludeUser) {
+            user.excludeUsers.push(excludeUser);
+          }
+        }
+      }
+    }
   }
   public reset() {
     this.users = [];
@@ -40,10 +70,7 @@ export class UserCollection {
       a = a.filter(vo => vo.name !== user.name);
       //current drawer excludeUsers
       for (let name of user.excludeUsers) {
-        const undesirable = this.getUser(name);
-        if (undesirable !== null) {
-          a = a.filter(vo => vo.name !== undesirable.name);
-        }
+        a = a.filter(vo => vo.name !== name);
       }
 
       // priority to no givers
@@ -67,7 +94,7 @@ export class UserCollection {
         matchs.push(match);
       }
     }
-    // algorythme à améliorer
+    // algorythme à revoir ... cette sécurité peut entrainer le crash ...
     if (matchs.length == this.users.length) {
       return matchs;
     } else {

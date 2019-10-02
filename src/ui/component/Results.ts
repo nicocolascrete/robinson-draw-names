@@ -1,5 +1,5 @@
 import { AComponent, IComponentProps } from "../AComponent";
-import { MatchVO } from "../../model/MatchVO";
+import { MatchVO } from "../../datamanager/model/MatchVO";
 
 export interface ResultsProps extends IComponentProps {
   onAddUser: () => void;

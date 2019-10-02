@@ -1,11 +1,11 @@
 import { AppSate } from "./config/AppState";
-import { UserCollection } from "./model/UserCollection";
+import { UserCollection } from "./datamanager/UserCollection";
 import { AComponent, IComponentProps } from "./ui/AComponent";
 import { Results } from "./ui/component/Results";
 import { Start } from "./ui/component/Start";
 import { ComponentName } from "./ui/ComponentName";
 import { AddUser } from "./ui/component/AddUser";
-import { UserVO } from "./model/UserVO";
+import { UserVO } from "./datamanager/model/UserVO";
 
 class App {
   rootElement: HTMLElement;

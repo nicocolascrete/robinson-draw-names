@@ -1,5 +1,5 @@
 import { IComponent } from "./IComponent";
-import { UserCollection } from "../model/UserCollection";
+import { UserCollection } from "../datamanager/UserCollection";
 export interface IComponentProps {
   onUpdate: () => void;
 }
