@@ -26,7 +26,7 @@ export class Start extends AComponent<StartProps> {
     if (this.users.getUsers().length > 0) {
       let a = [];
       this.users.getUsers().map(vo => a.push(this._renderDrawer(vo)));
-      return `<table id="table"><tr><td>NAME</td></tr>${a}</table>`;
+      return `<table id="table"><tr><td id="title">NAME</td></tr>${a}</table>`;
     }
     return `<p>Welcome to robinson draw names, the application that will allow you to prepare the draw for your family gifts.</p>`;
   }
@@ -53,9 +53,11 @@ export class Start extends AComponent<StartProps> {
     let html = `
       <div>
         ${this._renderListDrawers()}
-        <button type="button" id="addButton">Add drawer</button>
-        ${this._renderMatchingButton()}
-        ${this._renderResetButton()}
+        <div id="buttons">
+          <button type="button" id="addButton">Add drawer</button>
+          ${this._renderMatchingButton()}
+          ${this._renderResetButton()}
+        </div>
       </div>
     `;
     // patch

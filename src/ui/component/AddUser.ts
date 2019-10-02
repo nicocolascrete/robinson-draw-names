@@ -43,8 +43,10 @@ export class AddUser extends AComponent<AddUserProps> {
       <form>
         User name: <input type="text" id="userName"><br>
         User conjoint: <input type="text" id="userConjoint"><br>
-        <input type="button" value="Submit" id="submitButton">
-        <button type="button" id="backButton">Back</button>
+        <div id="buttons">
+          <button type="button" id="submitButton">Submit</button>
+          <button type="button" id="backButton">Back</button>
+        </div>
       </form>
     `;
   }

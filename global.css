@@ -10,6 +10,23 @@ table {
   width: 100%;
   border-collapse: collapse;
 }
+button {
+  background-color: black;
+  border: none;
+  color: white;
+  padding: 5px 10px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 12px;
+}
+#buttons {
+  margin-top: 15px;
+}
+#title {
+  background-color: black;
+  color: white;
+}
 #root {
   display: flex;
   justify-content: center;
