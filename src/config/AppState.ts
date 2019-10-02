@@ -1,5 +1,5 @@
 export enum AppSate {
   Start = "start",
-  AddDrawer = "add-drawer",
+  AddUser = "add-user",
   Results = "results"
 }

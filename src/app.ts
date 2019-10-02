@@ -75,7 +75,7 @@ class App {
     this._setState(this.prevState);
   };
   onAddUser = (event: any) => {
-    this._setState(AppSate.AddDrawer);
+    this._setState(AppSate.AddUser);
   };
   onAddedUser = (vo: UserVO) => {
     this.drawerCollection.addUser(vo);
