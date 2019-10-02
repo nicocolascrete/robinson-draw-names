@@ -2,6 +2,10 @@
 
 ## next
 
+- optimization matching algorythm
+
+## 0.2.0
+
 - add jest test
 - add style
 - matching
